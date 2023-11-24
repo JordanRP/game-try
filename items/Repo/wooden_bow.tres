@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="WEAPON_ITEM" load_steps=3 format=3 uid="uid://deiwmyht2csyx"]
+
+[ext_resource type="Texture2D" uid="uid://y1566ew4dy46" path="res://16x16 dungeon ii wall reconfig/bow/bow.png" id="1_vao3x"]
+[ext_resource type="Script" path="res://items/Classes/weapon_item_class.gd" id="1_vgk3a"]
+
+[resource]
+script = ExtResource("1_vgk3a")
+WEAPON_DAMAGE = 0
+SPEED_ATTACK = 0
+BASIC_ATTACK = "shot"
+MEDIUM_ATTACK = "shot 3 arrows"
+HEAVY_ATTACK = "charge arrow"
+BUFF_SKILL = "speed attack"
+ULTIMATE_SKILL = ""
+ITEM_NAME = "wooden bow"
+ITEM_TEXTURE = ExtResource("1_vao3x")
+HOVER_TEXT = "un arco de madera roto"
+rarity = 0

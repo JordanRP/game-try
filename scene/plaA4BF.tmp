@@ -1,0 +1,103 @@
+[gd_scene load_steps=10 format=3 uid="uid://ba5dud1a8n7ah"]
+
+[ext_resource type="Script" path="res://scene/CharacterBody2DMovement.gd" id="1_2ly0r"]
+[ext_resource type="Texture2D" uid="uid://csvpp4as4w0kh" path="res://Warrior/SpriteSheet/Warrior_Sheet-Effect.png" id="1_qhwlx"]
+[ext_resource type="PackedScene" uid="uid://dc8y76iwlw2rg" path="res://scene/dash.tscn" id="3_jb2dr"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6l368"]
+radius = 7.0
+height = 34.0
+
+[sub_resource type="Animation" id="Animation_b86lh"]
+resource_name = "Idle"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_0xxd4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_pj2dr"]
+resource_name = "Walk"
+length = 0.875
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.4, 0.5, 0.625, 0.75, 0.875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11, 12, 13]
+}
+
+[sub_resource type="Animation" id="Animation_cjj0w"]
+resource_name = "Dash"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [86, 87, 88, 89, 90]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x8nbp"]
+_data = {
+"Dash": SubResource("Animation_cjj0w"),
+"Idle": SubResource("Animation_b86lh"),
+"RESET": SubResource("Animation_0xxd4"),
+"Walk": SubResource("Animation_pj2dr")
+}
+
+[node name="player" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_2ly0r")
+
+[node name="Dash" parent="CharacterBody2D" instance=ExtResource("3_jb2dr")]
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(0, -2)
+scale = Vector2(1, 1.03536)
+texture = ExtResource("1_qhwlx")
+hframes = 6
+vframes = 17
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-8, 3)
+shape = SubResource("CapsuleShape2D_6l368")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
+libraries = {
+"": SubResource("AnimationLibrary_x8nbp")
+}
